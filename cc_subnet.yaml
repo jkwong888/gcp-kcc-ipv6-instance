@@ -1,0 +1,16 @@
+# create a subnet in shared vpc in us-central1 for turn servers
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: turn-us-west2
+  annotations:
+    cnrm.cloud.google.com/project-id: jkwng-nonprod-vpc
+spec:
+  region: us-west2
+  ipCidrRange: 10.11.0.0/24
+  description: turn subnet created by cc
+  privateIpGoogleAccess: true
+  stackType: IPV4_IPV6
+  ipv6AccessType: EXTERNAL
+  networkRef:
+    external: https://www.googleapis.com/compute/v1/projects/jkwng-nonprod-vpc/global/networks/shared-vpc-nonprod-1

@@ -1,0 +1,25 @@
+# create a  turn server with ipv6 external address
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeInstance
+metadata:
+  name: turn-vm1-west2
+spec:
+  machineType: n2-standard-2
+  zone: us-west2-a
+  bootDisk:
+    initializeParams:
+      size: 16
+      type: pd-standard
+      sourceImageRef:
+        external: debian-cloud/debian-10
+  networkInterface:
+  - networkRef:
+      external: https://www.googleapis.com/compute/v1/projects/jkwng-nonprod-vpc/global/networks/shared-vpc-nonprod-1
+    subnetworkRef:
+      name: turn-us-west2
+    stackType: IPV4_IPV6
+    accessConfig:
+    - networkTier: STANDARD
+    ipv6AccessType: EXTERNAL
+    ipv6AccessConfig:
+    - networkTier: PREMIUM
